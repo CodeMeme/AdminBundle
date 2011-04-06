@@ -1,0 +1,20 @@
+home:
+   pattern:  /
+   defaults: { _controller: CodeMemeAdminBundle:Default:index }
+
+list:
+    pattern:  /{slug}
+    defaults: { _controller: CodeMemeAdminBundle:Model:index }
+
+new:
+    pattern:  /{slug}/new
+    defaults: { _controller: CodeMemeAdminBundle:Model:new }
+
+edit:
+    pattern:  /{slug}/{id}/edit
+    defaults: { _controller: CodeMemeAdminBundle:Model:edit }
+
+remove:
+   pattern:  /{slug}/{id}/remove
+   defaults: { _controller: CodeMemeAdminBundle:Model:remove }
+

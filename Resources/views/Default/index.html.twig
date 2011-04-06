@@ -1,0 +1,13 @@
+{% extends 'CodeMemeAdminBundle::layout.html.twig' %}
+
+{% block content %}
+
+<ul>
+{% for slug, model in models %}
+    <li>{{ slug }}</li>
+{% else %}
+    <li>No models configured</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
