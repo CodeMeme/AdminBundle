@@ -9,8 +9,4 @@
         <parameter key="admin.model_collection.class">Doctrine\Common\Collections\ArrayCollection</parameter>
     </parameters>
 
-    <services>
-        <service id="admin.model_collection" class="%admin.model_collection.class%" />
-        <service id="admin.models" alias="admin.model_collection" />
-    </services>
 </container>

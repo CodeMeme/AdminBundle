@@ -1,0 +1,17 @@
+{% extends 'CodeMemeAdminBundle::layout.html.twig' %}
+
+{% block content %}
+<h2>{{ model.label | capitalize }}</h2>
+
+<ul>
+    {% for entity in entities %}
+        <li>
+            <a href="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}">
+                {{ entity }}
+            </a>
+        </li>
+    {% else %}
+        <li>No {{ model.label }} found</li>
+    {% endfor %}
+</ul>
+{% endblock %}

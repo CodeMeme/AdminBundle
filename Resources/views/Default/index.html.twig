@@ -1,12 +1,15 @@
 {% extends 'CodeMemeAdminBundle::layout.html.twig' %}
 
 {% block content %}
-
 <ul>
-{% for slug, model in models %}
-    <li>{{ slug }}</li>
+{% for model in models %}
+    <li>
+        <a href="{{ path('admin.list', { 'slug': model.slug }) }}">
+            {{ model.label | capitalize }}
+        </a>
+    </li>
 {% else %}
-    <li>No models configured</li>
+    <li>Sorry, but nothing has been configured yet.</li>
 {% endfor %}
 </ul>
 

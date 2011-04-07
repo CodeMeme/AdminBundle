@@ -9,7 +9,11 @@ class ModelContainer extends ContainerAware
 
     private $class;
 
-    private $em = 'default';
+    private $entityManager;
+
+    private $label;
+
+    private $slug;
 
     public function getClass()
     {
@@ -23,14 +27,50 @@ class ModelContainer extends ContainerAware
         return $this;
     }
 
-    public function getEntityManager()
+    public function getEntitymanager()
     {
-        $em = $this->container->get(sprintf(
-            'doctrine.orm.%s_entity_manager',
-            $this->em
-        ));
+        return $this->entityManager;
+    }
+
+    public function setEntitymanager($entityManager)
+    {
+        $this->entityManager = $entityManager;
         
-        return $em;
+        return $this;
+    }
+
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    public function setLabel($label)
+    {
+        $this->label = $label;
+        
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        
+        return $this;
+    }
+
+    public function getRepository()
+    {
+        return $this->getEntityManager()->getRepository($this->getClass());
+    }
+
+    public function __toString()
+    {
+        return $this->getLabel();
     }
 
 }

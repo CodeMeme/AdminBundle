@@ -3,6 +3,8 @@
 namespace CodeMeme\AdminBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -24,18 +26,35 @@ class CodeMemeAdminExtension extends Extension
 
     protected function loadModels($models, ContainerBuilder $container)
     {
-        $collection = $container->get('admin.models');
-        $class      = $container->getParameter('admin.model_container.class');
+        $containerDef = new Definition('%admin.model_collection.class%');
         
         foreach ($models as $slug => $config) {
-            $modelContainer = new $class;
+            $modelDef = new Definition('%admin.model_container.class%');
             
-            $modelContainer->setClass($config['class']);
-            $modelContainer->setContainer($container);
+            $config = array_merge(array(
+                'label'         =>  $slug,
+                'entityManager' =>  'default',
+            ), $config);
             
-            $collection->set($slug, $modelContainer);
-            $container->set(sprintf('admin.%s_model', $slug), $modelContainer);
+            $setters = array(
+                'setContainer'      =>  new Reference('service_container'),
+                'setClass'          =>  $config['class'],
+                'setSlug'           =>  $slug,
+                'setLabel'          =>  $config['label'],
+                'setEntityManager'  =>  new Reference(sprintf('doctrine.orm.%s_entity_manager', $config['entityManager'])),
+            );
+            
+            foreach ($setters as $setter => $value) {
+                $modelDef->addMethodCall($setter, array($value));
+            }
+            
+            $containerDef->addMethodCall('set', array($slug, $modelDef));
+            
+            $container->setDefinition(sprintf('admin.%s_model', $slug), $modelDef);
         }
+        
+        $container->setDefinition('admin.model_collection', $containerDef);
+        $container->setAlias('admin.models', 'admin.model_collection');
     }
 
     /**
