@@ -29,18 +29,7 @@ class ModelFormType extends AbstractType
         }
         
         foreach ($metadata->associationMappings as $field => $properties) {
-            $property = $metadata->reflClass->getProperty($field);
-            $property->setAccessible(true);
-            
-            $child = $property->getValue($this->entity);
-            
-            if ($child instanceof Collection) {
-                // No idea yet :)
-            } else if ($child) {
-                $builder->add($field, 'entity', array(
-                    'class' => get_class($child),
-                ));
-            }
+            $builder->add($field);
         }
     }
 
