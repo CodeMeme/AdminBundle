@@ -7,6 +7,9 @@
     <parameters>
         <parameter key="admin.model_container.class">CodeMeme\AdminBundle\Container\ModelContainer</parameter>
         <parameter key="admin.model_collection.class">Doctrine\Common\Collections\ArrayCollection</parameter>
+
+        <parameter key="admin.group_container.class">CodeMeme\AdminBundle\Container\GroupContainer</parameter>
+        <parameter key="admin.group_collection.class">Doctrine\Common\Collections\ArrayCollection</parameter>
     </parameters>
 
 </container>

@@ -22,6 +22,50 @@ class CodeMemeAdminExtension extends Extension
                 $this->loadModels($config['models'], $container);
             }
         }
+        
+        foreach ($configs as $config) {
+            if (isset($config['groups'])) {
+                $this->loadGroups($config['groups'], $container);
+            }
+        }
+    }
+
+    protected function loadGroups($groups, ContainerBuilder $container)
+    {
+        $containerDef = new Definition('%admin.group_collection.class%');
+        
+        foreach ($groups as $key => $config) {
+            $groupDef = new Definition("%admin.group_container.class%");
+            $groupKey = sprintf('admin.%s_group', $key);
+            
+            $containerDef->addMethodCall('set', array($key, $groupDef));
+            $container->setDefinition($groupKey, $groupDef);
+            
+            $config = array_merge(array(
+                'label' => ucwords(str_replace(array('-', '_'), ' ', $key)),
+            ), $config);
+            
+            $setters = array(
+                'setLabel' => $config['label'],
+            );
+            
+            foreach ($setters as $setter => $value) {
+                $groupDef->addMethodCall($setter, array($value));
+            }
+            
+            if (isset($config['models'])) {
+                foreach ($config['models'] as $model) {
+                    $modelKey = sprintf('admin.%s_model', $model);
+                    $modelDef = $container->getDefinition($modelKey);
+                    
+                    $modelDef->addMethodCall('setGroup', array(new Reference($groupKey)));
+                    $groupDef->addMethodCall('addModel', array(new Reference($modelKey)));
+                }
+            }
+        }
+        
+        $container->setDefinition('admin.group_collection', $containerDef);
+        $container->setAlias('admin.groups', 'admin.group_collection');
     }
 
     protected function loadModels($models, ContainerBuilder $container)

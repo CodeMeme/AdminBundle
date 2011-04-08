@@ -12,6 +12,8 @@ class ModelContainer extends ContainerAware
 
     private $entityManager;
 
+    private $group;
+
     private $label;
 
     private $slug;
@@ -36,6 +38,18 @@ class ModelContainer extends ContainerAware
     public function setEntitymanager($entityManager)
     {
         $this->entityManager = $entityManager;
+        
+        return $this;
+    }
+
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    public function setGroup($group)
+    {
+        $this->group = $group;
         
         return $this;
     }
@@ -91,7 +105,7 @@ class ModelContainer extends ContainerAware
 
     public function __toString()
     {
-        return $this->getLabel();
+        return (String) $this->getLabel();
     }
 
 }
