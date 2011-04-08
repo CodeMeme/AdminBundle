@@ -1,20 +1,40 @@
 {% extends 'CodeMemeAdminBundle::layout.html.twig' %}
 
+{% block header %}
+    <h1>Home</h1>
+{% endblock header %}
+
+
 {% block content %}
-<h2>
-    Home
-</h2>
+    <!-- Groups -->
+    {% for group in groups %}
+    <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
 
-<ul>
-{% for model in models %}
-    <li>
-        <a href="{{ path('admin.list', { 'slug': model.slug }) }}">
-            {{ model }}
-        </a>
-    </li>
-{% else %}
-    <li>Sorry, but nothing has been configured yet.</li>
-{% endfor %}
-</ul>
+        {{ block('group__row') }}
 
-{% endblock %}
+        {% for model in group.models %}
+            {{ block('model__row') }}
+        {% endfor %}
+    
+    </ul>
+    {% endfor %}
+
+    <!-- Groupless -->
+    <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="c">
+        {% for model in models %}
+            {% if not model.group %}
+                {{ block('model__row') }}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock content %}
+
+
+{% block group__row %}
+    <li data-role="list-divider">{{ group }}</tr>
+{% endblock group__row %}
+
+
+{% block model__row %}
+    <li><a href="{{ path('admin.list', { 'slug': model.slug }) }}">{{ model }}</a></li>
+{% endblock model__row %}

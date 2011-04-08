@@ -1,24 +1,28 @@
 {% extends 'CodeMemeAdminBundle::layout.html.twig' %}
 
+{% block header %}
+    <h1>
+        {% if entity.id %}
+            {{ entity }}
+        {% else %}
+            New {{ model }}
+        {% endif %}
+    </h1>
+    <a href="{{ path('admin.home') }}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+{% endblock header %}
+
+
 {% block content %}
-<h2>
-    <a href="{{ path('admin.home') }}">Home</a>
-    &raquo;
-    <a href="{{ path('admin.list', { 'slug': model.slug }) }}">
-        {{ model }}
-    </a>
-    &raquo;
-    {% if entity.id %}
-        {{ entity }}
-    {% else %}
-        New {{ model }}
-    {% endif %}
-</h2>
-
 <form action="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}" method="post" {{ form.enctype }}>
+    <ul data-role="listview" data-inset="true" data-theme="c">
+        {{ form.widget }}
+    </ul>
 
-    {{ form.widget }}
-
-    <input type="submit" />
+    {% if entity.id %}
+        <button type="submit" data-theme="e" name="submit" data-icon="check">Save</button>
+    {% else %}
+        <button type="submit" data-theme="e" name="submit" data-icon="add">Create</button>
+    {% endif %}
+    
 </form>
 {% endblock %}

@@ -1,1 +1,9 @@
-{% extends "TwigBundle::table_layout.html.twig" %}
+{% extends "TwigBundle::div_layout.html.twig" %}
+
+{% block field__row %}
+<li data-role="fieldcontain">
+    {{ renderer.label }}
+    {{ renderer.errors }}
+    {{ renderer.widget }}
+</li>
+{% endblock %}

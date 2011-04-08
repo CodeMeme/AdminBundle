@@ -1,22 +1,21 @@
 {% extends 'CodeMemeAdminBundle::layout.html.twig' %}
 
-{% block content %}
-<h2>
-    <a href="{{ path('admin.home') }}">Home</a>
-    &raquo;
-    {{ model.label }}
-</h2>
+{% block header %}
+    <h1>{{ model }}</h1>
+    <a href="{{ path('admin.home') }}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+{% endblock header %}
 
-<ul>
-    <li>
-        <a href="{{ path('admin.new', { 'slug': model.slug }) }}">Add new {{ model }}</a>
-    </li>
-    {% for entity in entities %}
-        <li>
-            <a href="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}">
-                {{ entity }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+
+{% block content %}
+    <ul data-role="listview" data-filter="true" data-inset="true" data-theme="c" data-dividertheme="b">
+        {% for entity in entities %}
+            <li>
+                <a href="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}">
+                    {{ entity }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('admin.new', { 'slug': model.slug }) }}" data-role="button" data-theme="e" data-icon="plus">Add new {{ model }}</a>
 {% endblock %}
