@@ -8,25 +8,17 @@
         {{ model }}
     </a>
     &raquo;
-    {{ entity }}
+    {% if entity.id %}
+        {{ entity }}
+    {% else %}
+        New {{ model }}
+    {% endif %}
 </h2>
 
-<form action="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}"
-      method="post"
-      {{ form.enctype }}>
-    
-    {{ form.errors }}
-    
-    {% for field in form %}
-        <div>
-            {{ field.label }}
-            {{ field.errors }}
-            {{ field.widget }}
-        </div>
-    {% endfor %}
-    
-    {{ form.rest }}
-    
+<form action="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}" method="post" {{ form.enctype }}>
+
+    {{ form.widget }}
+
     <input type="submit" />
 </form>
 {% endblock %}

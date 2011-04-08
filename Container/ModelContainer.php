@@ -64,6 +64,16 @@ class ModelContainer extends ContainerAware
         return $this;
     }
 
+    public function getEntity($id = null)
+    {
+        if ($id && ($entity = $this->getRepository()->find($id))) {
+            return $entity;
+        } else {
+            $class = $this->getClass();
+            return new $class;
+        }
+    }
+
     public function getRepository()
     {
         return $this->getEntityManager()->getRepository($this->getClass());
@@ -73,7 +83,7 @@ class ModelContainer extends ContainerAware
     {
         $type = new ModelFormType($entity, $this->getEntityManager());
         
-        $form = $this->container->get('form.factory')->create($type);
+        $form = $this->container->get('form.factory')->create($type, 'entity');
         $form->setData($entity);
         
         return $form;

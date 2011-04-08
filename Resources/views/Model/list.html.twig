@@ -8,14 +8,15 @@
 </h2>
 
 <ul>
+    <li>
+        <a href="{{ path('admin.new', { 'slug': model.slug }) }}">Add new {{ model }}</a>
+    </li>
     {% for entity in entities %}
         <li>
             <a href="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}">
                 {{ entity }}
             </a>
         </li>
-    {% else %}
-        <li>No {{ model.label }} found</li>
     {% endfor %}
 </ul>
 {% endblock %}

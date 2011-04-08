@@ -14,6 +14,8 @@ class ModelFormType extends AbstractType
 
     private $em;
 
+    private $fields;
+
     public function __construct($entity, $em)
     {
         $this->entity   =   $entity;
@@ -22,15 +24,30 @@ class ModelFormType extends AbstractType
 
     public function buildForm(FormBuilder $builder, Array $options)
     {
-        $metadata = $this->em->getClassMetadata(get_class($this->entity));
-        
-        foreach ($metadata->fieldMappings as $field => $properties) {
+        foreach ($this->getFields() as $field) {
             $builder->add($field);
         }
-        
-        foreach ($metadata->associationMappings as $field => $properties) {
-            $builder->add($field);
+    }
+
+    public function getFields()
+    {
+        if (null === $this->fields) {
+            $metadata = $this->em->getClassMetadata(get_class($this->entity));
+            
+            $this->setFields(array_merge(
+                array_keys($metadata->fieldMappings),
+                array_keys($metadata->associationMappings)
+            ));
         }
+        
+        return $this->fields;
+    }
+
+    public function setFields(Array $fields)
+    {
+        $this->fields = $fields;
+        
+        return $this;
     }
 
     public function getDefaultOptions(Array $options)

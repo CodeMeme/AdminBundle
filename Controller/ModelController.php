@@ -18,16 +18,24 @@ class ModelController extends Controller
         ));
     }
 
-    public function editAction($slug, $id)
+    public function newAction($slug)
+    {
+        return $this->editAction($slug);
+    }
+
+    public function editAction($slug, $id = null)
     {
         $model  =   $this->getModel($slug);
-        $entity =   $model->getRepository()->find($id);
+        $entity =   $model->getEntity($id);
         $form   =   $model->getForm($entity);
+        
+        $renderer = $this->get('form.factory')->createRenderer($form, 'twig');
+        $renderer->setTemplate('CodeMemeAdminBundle:Form:default.html.twig');
         
         return $this->render('CodeMemeAdminBundle:Model:edit.html.twig', array(
             'model'     =>  $model,
             'entity'    =>  $entity,
-            'form'      => $this->get('form.factory')->createRenderer($form, 'twig'),
+            'form'      =>  $renderer,
         ));
     }
 
