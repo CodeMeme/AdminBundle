@@ -1,7 +1,32 @@
 {% extends 'CodeMemeAdminBundle::layout.html.twig' %}
 
 {% block content %}
-<h2>{{ model }} &raquo; {{ entity }}</h2>
+<h2>
+    <a href="{{ path('admin.home') }}">Home</a>
+    &raquo;
+    <a href="{{ path('admin.list', { 'slug': model.slug }) }}">
+        {{ model }}
+    </a>
+    &raquo;
+    {{ entity }}
+</h2>
 
-{{ form }}
+<form action="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}"
+      method="post"
+      {{ form.enctype }}>
+    
+    {{ form.errors }}
+    
+    {% for field in form %}
+        <div>
+            {{ field.label }}
+            {{ field.errors }}
+            {{ field.widget }}
+        </div>
+    {% endfor %}
+    
+    {{ form.rest }}
+    
+    <input type="submit" />
+</form>
 {% endblock %}

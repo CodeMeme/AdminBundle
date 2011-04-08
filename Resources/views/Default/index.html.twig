@@ -1,11 +1,15 @@
 {% extends 'CodeMemeAdminBundle::layout.html.twig' %}
 
 {% block content %}
+<h2>
+    <a href="{{ path('admin.home') }}">Home</a>
+</h2>
+
 <ul>
 {% for model in models %}
     <li>
         <a href="{{ path('admin.list', { 'slug': model.slug }) }}">
-            {{ model.label | capitalize }}
+            {{ model }}
         </a>
     </li>
 {% else %}

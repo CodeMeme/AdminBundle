@@ -22,18 +22,18 @@ class ModelController extends Controller
     {
         $model  =   $this->getModel($slug);
         $entity =   $model->getRepository()->find($id);
-        $form   =   'Form';
+        $form   =   $model->getForm($entity);
         
         return $this->render('CodeMemeAdminBundle:Model:edit.html.twig', array(
             'model'     =>  $model,
             'entity'    =>  $entity,
-            'form'      =>  $form,
+            'form'      => $this->get('form.factory')->createRenderer($form, 'twig'),
         ));
     }
 
     protected function getModel($slug)
     {
-        return $this->get(sprintf('admin.%s_model', $slug));
+        return $this->get('admin.models')->get(str_replace('-', '_', $slug));
     }
 
 }

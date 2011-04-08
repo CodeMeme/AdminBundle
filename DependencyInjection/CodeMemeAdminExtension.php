@@ -28,18 +28,19 @@ class CodeMemeAdminExtension extends Extension
     {
         $containerDef = new Definition('%admin.model_collection.class%');
         
-        foreach ($models as $slug => $config) {
+        foreach ($models as $key => $config) {
             $modelDef = new Definition('%admin.model_container.class%');
             
             $config = array_merge(array(
-                'label'         =>  $slug,
+                'label'         =>  ucwords(str_replace(array('_', '-'), ' ', $key)),
+                'slug'          =>  $key,
                 'entityManager' =>  'default',
             ), $config);
             
             $setters = array(
                 'setContainer'      =>  new Reference('service_container'),
                 'setClass'          =>  $config['class'],
-                'setSlug'           =>  $slug,
+                'setSlug'           =>  $config['slug'],
                 'setLabel'          =>  $config['label'],
                 'setEntityManager'  =>  new Reference(sprintf('doctrine.orm.%s_entity_manager', $config['entityManager'])),
             );
@@ -48,9 +49,9 @@ class CodeMemeAdminExtension extends Extension
                 $modelDef->addMethodCall($setter, array($value));
             }
             
-            $containerDef->addMethodCall('set', array($slug, $modelDef));
+            $containerDef->addMethodCall('set', array($key, $modelDef));
             
-            $container->setDefinition(sprintf('admin.%s_model', $slug), $modelDef);
+            $container->setDefinition(sprintf('admin.%s_model', $key), $modelDef);
         }
         
         $container->setDefinition('admin.model_collection', $containerDef);

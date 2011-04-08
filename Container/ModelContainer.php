@@ -2,6 +2,7 @@
 
 namespace CodeMeme\AdminBundle\Container;
 
+use CodeMeme\AdminBundle\Form\ModelFormType;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
 class ModelContainer extends ContainerAware
@@ -66,6 +67,16 @@ class ModelContainer extends ContainerAware
     public function getRepository()
     {
         return $this->getEntityManager()->getRepository($this->getClass());
+    }
+
+    public function getForm($entity)
+    {
+        $type = new ModelFormType($entity, $this->getEntityManager());
+        
+        $form = $this->container->get('form.factory')->create($type);
+        $form->setData($entity);
+        
+        return $form;
     }
 
     public function __toString()
