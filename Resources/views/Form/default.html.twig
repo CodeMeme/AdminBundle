@@ -1,9 +1,14 @@
 {% extends "TwigBundle::div_layout.html.twig" %}
 
 {% block field__row %}
-<li data-role="fieldcontain">
-    {{ renderer.label }}
-    {{ renderer.errors }}
-    {{ renderer.widget }}
+<li data-role="fieldcontain" class="{% if renderer.vars.required %}required{% endif %}">
+    <div class="span-11">
+        {{ renderer.label }}
+    </div>
+    <div class="span-12 last">
+        {{ renderer.errors }}
+        {{ renderer.widget }}
+    </div>
+    <div class="clear"></div>
 </li>
 {% endblock %}

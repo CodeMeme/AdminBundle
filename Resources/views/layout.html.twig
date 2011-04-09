@@ -5,7 +5,7 @@
         <title>{% block title %}Admin{%endblock title %}</title>
 
         <meta charset="utf-8" />
-        <!-- Mobile -->
+        <!-- Mobile
         <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
         <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
@@ -20,28 +20,43 @@
                 });
             });
         </script>
-        <!--  -->
+        <style type="text/css" media="screen">
+            div.span-11,
+            div.span-12 { display: inline; }
+        </style>
+        -->
+        
+        <!-- Desktop -->
+        <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/screen.css') }}" type="text/css" media="screen, projection" />
+        <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/print.css') }}" type="text/css" media="print" />
+        <!--[if lt IE 8]>
+          <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/ie.css') }}" type="text/css" media="screen, projection" />
+        <![endif]-->
+        <link rel="stylesheet" href="{{ asset('bundles/codememeadmin/styles.css') }}" type="text/css" media="screen" />
+        
     </head>
     
     <body>
-        <div data-role="page" data-theme="b">
-            <div data-role="header" data-theme="a">
+        <div id="page" data-role="page" data-theme="b">
+            <div id="header" data-role="header" data-theme="a">
                 {% block header %}
                     Admin
                 {% endblock header %}
             </div>
 
             {% if app.session.flashes %}
-                <ul id="flashes" data-role="listview" data-theme="e">
-                    {% for flash in app.session.flashes %}
-                        <li data-icon="delete" data-iconpos="notext" data-direction="reverse">
-                            <a>{{ flash }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                <div id="flashes">
+                    <ul data-role="listview" data-theme="e">
+                        {% for type, flash in app.session.flashes %}
+                            <li data-icon="delete" data-iconpos="notext" data-direction="reverse" class="{{ type }}">
+                                <a>{{ flash }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endif %}
 
-            <div data-role="content">
+            <div id="content" data-role="content" class="container">
                 {% block body %}
                     {% block content %}{% endblock content %}
                 {% endblock body %}
