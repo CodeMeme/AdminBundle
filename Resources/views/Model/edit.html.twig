@@ -14,14 +14,14 @@
 
 {% block content %}
 <form action="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}" method="post" {{ form.enctype }}>
-    <ul data-role="listview" data-inset="true" data-theme="c">
+    <ul data-role="listview" data-inset="true" data-theme="c" class="ui-body-d">
         {{ form.widget }}
     </ul>
 
     {% if entity.id %}
-        <button type="submit" data-theme="e" name="submit" data-icon="check">Save</button>
+        <button type="submit" data-inline="true" data-theme="e" name="submit" data-icon="check">Save</button>
     {% else %}
-        <button type="submit" data-theme="e" name="submit" data-icon="add">Create</button>
+        <button type="submit" data-inline="true" data-theme="e" name="submit" data-icon="add">Create</button>
     {% endif %}
     
 </form>

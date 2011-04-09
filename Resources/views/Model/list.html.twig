@@ -17,5 +17,5 @@
         {% endfor %}
     </ul>
 
-    <a href="{{ path('admin.new', { 'slug': model.slug }) }}" data-role="button" data-theme="e" data-icon="plus">Add new {{ model }}</a>
+    <a href="{{ path('admin.new', { 'slug': model.slug }) }}" data-role="button" data-inline="true" data-theme="e" data-icon="plus">Add new {{ model }}</a>
 {% endblock %}

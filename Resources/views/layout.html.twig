@@ -5,12 +5,22 @@
         <title>{% block title %}Admin{%endblock title %}</title>
 
         <meta charset="utf-8" />
+        <!-- Mobile -->
         <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
-        
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
-        
         <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            jQuery(function() {
+                jQuery('li', '#flashes').live('click', function() {
+                    jQuery(this).animate({
+                        opacity: 0,
+                        height: 0
+                    });
+                });
+            });
+        </script>
+        <!--  -->
     </head>
     
     <body>
@@ -21,10 +31,19 @@
                 {% endblock header %}
             </div>
 
+            {% if app.session.flashes %}
+                <ul id="flashes" data-role="listview" data-theme="e">
+                    {% for flash in app.session.flashes %}
+                        <li data-icon="delete" data-iconpos="notext" data-direction="reverse">
+                            <a>{{ flash }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
             <div data-role="content">
                 {% block body %}
-                    {% block content %}
-                    {% endblock content %}
+                    {% block content %}{% endblock content %}
                 {% endblock body %}
             </div>
         </div>
