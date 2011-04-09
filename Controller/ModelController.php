@@ -28,6 +28,20 @@ class ModelController extends Controller
         $model  =   $this->getModel($slug);
         $entity =   $model->getEntity($id);
         $form   =   $model->getForm($entity);
+        $request    =   $this->get('request');
+        
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            
+            if ($form->isValid()) {
+                $em = $model->getEntityManager();
+                
+                $em->persist($form->getData());
+                $em->flush();
+                
+                $this->get('session')->setFlash('success', 'Saved');
+            }
+        }
         
         $renderer = $this->get('form.factory')->createRenderer($form, 'twig');
         $renderer->setTemplate('CodeMemeAdminBundle:Form:default.html.twig');
