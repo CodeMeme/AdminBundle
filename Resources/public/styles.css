@@ -177,6 +177,13 @@ button {
 
 a.button:hover,
 button:hover {
+    -moz-box-shadow:
+        0px 1px 3px rgba(000,000,000,0.5),
+        inset 0px 0px 0.5em rgba(255,255,255,0.5);
+}
+
+a.button:focus,
+button:focus {
     background: -moz-linear-gradient(
         top,
         #42ff42 0%,
@@ -187,8 +194,13 @@ button:hover {
         to(#146600));
 }
 
-form ul li {
+#content form ul li {
     padding: 0.5em 1em;
+    font-size: 1em;
+    text-shadow: none;
+}
+#content form ul li.header {
+    font-size: 1.3em;
 }
 
 form ul li label {
@@ -204,9 +216,11 @@ form ul li input[type="number"],
 form ul li input[type="text"],
 form ul li input[type="password"],
 form ul li textarea,
-form ul li label {
+form ul li label,
+form ul li select {
     padding: 5px;
     width: 100%;
+    font-size: 1.3em;
 }
 
 form ul li input[type="number"],
@@ -219,7 +233,17 @@ form ul li label {
 }
 form ul li input[type="text"],
 form ul li input[type="password"],
-form ul li textarea {
+form ul li textarea,
+form ul li select {
     background-color: #FFFFFF;
     border: 1px solid #BBBBBB;
+}
+
+.ui-li-count {
+    float: right;
+    border-radius: 1em;
+    -moz-box-shadow: inset 0px 0.1em 0.25em rgba(0,0,0,0.25);
+    padding: 0.1em 0.5em;
+    background: rgba(0,0,0,0.05);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.33);
 }

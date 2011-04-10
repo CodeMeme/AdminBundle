@@ -103,6 +103,16 @@ class ModelContainer extends ContainerAware
         return $form;
     }
 
+    public function getTotal()
+    {
+        $qb = $this->getRepository()->createQueryBuilder('e');
+        $qb->select('COUNT(e.id) AS total');
+        
+        $result = current($qb->getQuery()->execute());
+        
+        return $result['total'];
+    }
+
     public function __toString()
     {
         return (String) $this->getLabel();

@@ -5,6 +5,16 @@
         <title>{% block title %}Admin{%endblock title %}</title>
 
         <meta charset="utf-8" />
+        
+        {% block head %}
+            <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/screen.css') }}" type="text/css" media="screen, projection" />
+            <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/print.css') }}" type="text/css" media="print" />
+            <!--[if lt IE 8]>
+              <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/ie.css') }}" type="text/css" media="screen, projection" />
+            <![endif]-->
+            <link rel="stylesheet" href="{{ asset('bundles/codememeadmin/styles.css') }}" type="text/css" media="screen" />
+        {% endblock head %}
+        
         <!-- Mobile
         <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
@@ -25,14 +35,6 @@
             div.span-12 { display: inline; }
         </style>
         -->
-        
-        <!-- Desktop -->
-        <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/screen.css') }}" type="text/css" media="screen, projection" />
-        <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/print.css') }}" type="text/css" media="print" />
-        <!--[if lt IE 8]>
-          <link rel="stylesheet" href="{{ asset('bundles/sonatablueprint/ie.css') }}" type="text/css" media="screen, projection" />
-        <![endif]-->
-        <link rel="stylesheet" href="{{ asset('bundles/codememeadmin/styles.css') }}" type="text/css" media="screen" />
         
     </head>
     

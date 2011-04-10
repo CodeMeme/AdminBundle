@@ -36,5 +36,10 @@
 
 
 {% block model__row %}
-    <li><a href="{{ path('admin.list', { 'slug': model.slug }) }}">{{ model }}</a></li>
+    <li>
+        <a href="{{ path('admin.list', { 'slug': model.slug }) }}">
+            {{ model }}
+            <span class="ui-li-count">{{ model.total }}</span>
+        </a>
+    </li>
 {% endblock model__row %}

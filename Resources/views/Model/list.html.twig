@@ -2,13 +2,17 @@
 
 {% block header %}
     <h1>{{ model }}</h1>
-    <a href="{{ path('admin.home') }}" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+    <a href="{{ path('admin.home') }}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 {% endblock header %}
 
 
 {% block content %}
     <ul data-role="listview" data-filter="true" data-inset="true" data-theme="c" data-dividertheme="b">
-        <li data-role="list-divider" class="header">{{ model }}</tr>
+        <li data-role="list-divider" class="header">
+            {{ model }}
+            <span class="ui-li-count">{{ model.total }}</span>
+        </li>
+
         {% for entity in entities %}
             <li>
                 <a href="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}">
