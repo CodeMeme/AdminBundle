@@ -25,7 +25,16 @@ class ModelFormType extends AbstractType
     public function buildForm(FormBuilder $builder, Array $options)
     {
         foreach ($this->getFields() as $field) {
-            $builder->add($field);
+            switch ($field) {
+                case 'id':
+                    $type = 'hidden';
+                    break;
+                    
+                default:
+                    $type = null;
+            }
+            
+            $builder->add($field, $type);
         }
     }
 
