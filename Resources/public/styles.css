@@ -1,4 +1,4 @@
-html { background: #eee; }
+html, body { background: url("images/background.jpg"); height: 100%; }
 body {
     background: -moz-linear-gradient(
         bottom,
@@ -10,17 +10,20 @@ body {
         from(#eee),
         color-stop(0.50,#eee),
         to(#ccc));
+    background: url("images/background-spotlight.jpg") top center no-repeat;
 }
 
+#page {
+}
 #header {
     color: #ffffff;
     padding: 9px 22px;
     margin-bottom: 2em;
     background: -moz-linear-gradient(
         top,
-        #ffffff 0%,
-        #ffffff 50%,
-        #eee);
+        rgba(100%, 100%, 100%, 1) 0%,
+        rgba(100%, 100%, 100%, 0.95) 50%,
+        rgba(90%, 90%, 90%, 0.9));
     background: -webkit-gradient(
         linear, left top, left bottom,
         from(#ffffff),
@@ -39,22 +42,20 @@ body {
         color: #a00;
         text-shadow:
             0 -1px 0 rgba(0,0,0,0.2),
-            0 1px 0 rgba(255,255,255,1)
-        
+            0 1px 0 rgba(255,255,255,1);
     }
 
 #flashes {
-    position: relative;
-    top: -2em;
+    -moz-box-shadow: 0 0.5em 1em rgba(0,0,0,0.5);
 }
-    #flashes ul {
+    #content #flashes ul {
+        background: none;
+        border: none;
         list-style: none;
+        box-shadow: none;
         margin: 0;
         padding: 0;
         color: #333;
-        -moz-box-shadow: 0 1em 2em rgba(255,255,255,1);
-        -webkit-box-shadow:
-            inset 0px 0px 1px rgba(255,255,255,0.7);
         text-shadow:
             0px -1px 0px rgba(000,000,000,0),
             0px 1px 0px rgba(255,255,255,0.75);
@@ -62,14 +63,19 @@ body {
     }
         #flashes ul li {
             border-width: 1px;
-            padding: 0.8em 1.75em;
+            padding: 0;
             cursor: pointer;
             font-weight: bold;
             margin: 0;
+            border-radius: 10px;
         }
             #flashes ul li a {
                 text-decoration: none;
             }
+
+
+#content {
+}
 
 #content ul {
     list-style: none;
@@ -78,9 +84,9 @@ body {
     margin: 0 0 1.5em 0;
     background: -moz-linear-gradient(
         top,
-        #ffffff 0%,
-        #ffffff 75%,
-        #eee);
+        rgba(100%, 100%, 100%, 0.85) 0%,
+        rgba(100%, 100%, 100%, 0.85) 75%,
+        rgba(100%, 100%, 100%, 1));
     background: -webkit-gradient(
         linear, left top, left bottom,
         from(#ffffff),
@@ -90,7 +96,7 @@ body {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-box-shadow:
-        0 1px 3px rgba(0,0,0,0.25),
+        0 0.5em 1em rgba(0,0,0,0.25),
         inset 0 0 3px rgba(255,255,255,1);
     -webkit-box-shadow:
         0 1px 3px rgba(0,0,0,0.25),
@@ -112,7 +118,8 @@ body {
     color: #444;
 }
 #content ul li a:hover {
-    background: rgba(0,0,125,0.025);
+    background: rgba(100%, 100%, 100%, 0.5);
+    border-radius: 10px;
     color: #09f;
 }
 
@@ -121,11 +128,13 @@ body {
 }
 
 #content ul li.header {
+    -moz-box-shadow: 0 0.1em 0.25em rgba(0,0,0,0.15);
+    
     background: -moz-linear-gradient(
         top,
-        #369 0%,
-        #369 66%,
-        #258);
+        #fff 0%,
+        #fff 66%,
+        #eee);
     background: -webkit-gradient(
         linear, left top, left bottom,
         from(#369),
@@ -135,8 +144,9 @@ body {
     -moz-border-radius: 10px 10px 0 0;
     -webkit-border-radius: 10px 10px 0 0;
     padding: 0.5em 1em;
-    color: #fff;
-    text-shadow: none;
+    color: #444;
+    font-weight: bold;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
 }
 
 a.button,
@@ -244,6 +254,6 @@ form ul li select {
     border-radius: 1em;
     -moz-box-shadow: inset 0px 0.1em 0.25em rgba(0,0,0,0.25);
     padding: 0.1em 0.5em;
-    background: rgba(100%,100%,100%,0.25);
-    text-shadow: 0 1px 1px rgba(0,0,0,0.33);
+    background: rgba(100%,100%,100%,0.75);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.15);
 }

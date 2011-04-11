@@ -15,21 +15,24 @@
             <link rel="stylesheet" href="{{ asset('bundles/codememeadmin/styles.css') }}" type="text/css" media="screen" />
         {% endblock head %}
         
-        <!-- Mobile
-        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
         <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
         <script type="text/javascript" charset="utf-8">
             jQuery(function() {
                 jQuery('li', '#flashes').live('click', function() {
                     jQuery(this).animate({
                         opacity: 0,
                         height: 0
+                    }, function() {
+                        jQuery(this).remove();
                     });
                 });
             });
         </script>
+        
+        <!-- Mobile
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+        <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
         <style type="text/css" media="screen">
             div.span-11,
             div.span-12 { display: inline; }
@@ -46,19 +49,20 @@
                 {% endblock header %}
             </div>
 
-            {% if app.session.flashes %}
-                <div id="flashes">
-                    <ul data-role="listview" data-theme="e">
-                        {% for type, flash in app.session.flashes %}
-                            <li data-icon="delete" data-iconpos="notext" data-direction="reverse" class="{{ type }}">
-                                <a>{{ flash }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-
             <div id="content" data-role="content" class="container">
+                {% if app.session.flashes %}
+                    <div id="flashes">
+                        <ul data-role="listview" data-theme="e">
+                            {% for type, flash in app.session.flashes %}
+                                <li data-icon="delete" data-iconpos="notext" data-direction="reverse" class="{{ type }}">
+                                    <a>{{ flash }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <br />
+                    </div>
+                {% endif %}
+                
                 {% block body %}
                     {% block content %}{% endblock content %}
                 {% endblock body %}
