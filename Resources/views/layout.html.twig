@@ -44,9 +44,11 @@
     <body>
         <div id="page" data-role="page" data-theme="b">
             <div id="header" data-role="header" data-theme="a">
-                {% block header %}
-                    Admin
-                {% endblock header %}
+                {% block header %}<h1>Admin</h1>{% endblock header %}
+            </div>
+
+            <div id="navigation">
+                {% block navigation %}{% endblock navigation %}
             </div>
 
             <div id="content" data-role="content" class="container">
@@ -59,7 +61,6 @@
                                 </li>
                             {% endfor %}
                         </ul>
-                        <br />
                     </div>
                 {% endif %}
                 

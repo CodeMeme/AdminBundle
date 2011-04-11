@@ -18,7 +18,6 @@ body {
 #header {
     color: #ffffff;
     padding: 9px 22px;
-    margin-bottom: 2em;
     background: -moz-linear-gradient(
         top,
         rgba(100%, 100%, 100%, 1) 0%,
@@ -45,8 +44,35 @@ body {
             0 1px 0 rgba(255,255,255,1);
     }
 
+#navigation {
+    width: 100%;
+    background: rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    margin-bottom: 2em;
+    -moz-box-shadow: 0 0.25em 0.5em rgba(100%,100%,100%,0.1);
+}
+    #navigation ul {
+        list-style: none;
+        padding: 0.5em 1.75em;
+        margin: 0;
+    }
+        #navigation ul li {
+            display: inline;
+            padding: 0.25em;
+            color: #ddd;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        #navigation ul li + li {
+            
+        }
+#navigation a {
+    color: #fff;
+    text-decoration: none;
+}
+
 #flashes {
     -moz-box-shadow: 0 0.5em 1em rgba(0,0,0,0.5);
+    margin-bottom: 1.5em;
 }
     #content #flashes ul {
         background: none;
