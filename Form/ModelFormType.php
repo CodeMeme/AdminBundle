@@ -4,7 +4,7 @@ namespace CodeMeme\AdminBundle\Form;
 
 use Doctrine\Common\Collections\Collection;
 
-use Symfony\Component\Form\Type\AbstractType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
 class ModelFormType extends AbstractType

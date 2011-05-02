@@ -97,7 +97,7 @@ class ModelContainer extends ContainerAware
     {
         $type = new ModelFormType($entity, $this->getEntityManager());
         
-        $form = $this->container->get('form.factory')->create($type, 'entity');
+        $form = $this->container->get('form.factory')->create($type);
         $form->setData($entity);
         
         return $form;

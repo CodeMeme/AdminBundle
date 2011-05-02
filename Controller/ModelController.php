@@ -43,13 +43,10 @@ class ModelController extends Controller
             }
         }
         
-        $renderer = $this->get('form.factory')->createRenderer($form, 'twig');
-        $renderer->setTemplate('CodeMemeAdminBundle:Form:default.html.twig');
-        
         return $this->render('CodeMemeAdminBundle:Model:edit.html.twig', array(
             'model'     =>  $model,
             'entity'    =>  $entity,
-            'form'      =>  $renderer,
+            'form'      =>  $form->createView(),
         ));
     }
 

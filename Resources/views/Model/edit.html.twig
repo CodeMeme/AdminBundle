@@ -1,4 +1,5 @@
 {% extends 'CodeMemeAdminBundle::layout.html.twig' %}
+{% form_theme form 'CodeMemeAdminBundle:Form:default.html.twig' %}
 
 
 {% block navigation %}
@@ -27,7 +28,7 @@
 
 
 {% block content %}
-<form action="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}" method="post" {{ form.enctype }}>
+<form action="{{ path('admin.edit', { 'slug': model.slug, 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>
     <ul data-role="listview" data-inset="true" data-theme="c" class="ui-body-d">
         <li data-role="list-divider" class="header">
             {% if entity.id %}
@@ -37,7 +38,7 @@
             {% endif %}
         </li>
 
-        {{ form.widget }}
+        {{ form_widget(form) }}
     </ul>
 
     {% if entity.id %}

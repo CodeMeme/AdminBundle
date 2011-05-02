@@ -1,13 +1,13 @@
-{% extends "TwigBundle::div_layout.html.twig" %}
+{% extends "TwigBundle:Form:div_layout.html.twig" %}
 
-{% block field__row %}
-<li data-role="fieldcontain" class="{% if renderer.vars.required %}required{% endif %}">
+{% block field_row %}
+<li data-role="fieldcontain" class="{% if form.vars.required %}required{% endif %}">
     <div class="span-11">
-        {{ renderer.label }}
+        {{ form_label(form) }}
     </div>
     <div class="span-12 last">
-        {{ renderer.errors }}
-        {{ renderer.widget }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
     </div>
     <div class="clear"></div>
 </li>
